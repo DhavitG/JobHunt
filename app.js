@@ -11,6 +11,7 @@ const authRouter = require("./routes/auth");
 const jobRouter = require("./routes/jobs");
 
 // importing middlewares
+const authenticateUser = require("./middlewares/authentication");
 const notFoundMiddleware = require("./middlewares/not-found");
 const errorHandlerMiddleware = require("./middlewares/error-handler");
 
@@ -18,7 +19,7 @@ app.use(express.json());
 
 // routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/jobs", jobRouter);
+app.use("/api/v1/jobs", authenticateUser, jobRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
