@@ -7,7 +7,11 @@ const getJob = async (req, res) => {
 };
 
 const createJob = async (req, res) => {
-  res.send("create job");
+  console.log("Received token, req.user:", req.user);
+  if (!req.user) {
+    return res.status(401).json({ error: "Authentication failed" });
+  }
+  res.json(req.user);
 };
 
 const updateJob = async (req, res) => {
