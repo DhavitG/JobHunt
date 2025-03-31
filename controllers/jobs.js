@@ -1,5 +1,9 @@
 const getAllJobs = async (req, res) => {
-  res.send("get all jobs");
+  console.log("Received token, req.user:", req.user);
+  if (!req.user) {
+    return res.status(401).json({ error: "Authentication failed" });
+  }
+  res.json(req.user);
 };
 
 const getJob = async (req, res) => {
